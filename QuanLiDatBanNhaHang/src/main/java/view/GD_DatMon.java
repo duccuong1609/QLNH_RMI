@@ -88,6 +88,8 @@ public class GD_DatMon extends javax.swing.JPanel {
     private IMonDAO monDAO = MONDAO;
     private boolean back_toUI_DatBan;
     private boolean guiBep;
+    private boolean preLoad = false;
+    private List<String> ghiChus;
 
     public GD_DatMon(JPanel main, Ban ban, utils.Enum.DatMon_ThemMon loai) throws RemoteException {
         this.nv = AppUtils.NHANVIEN;
@@ -122,7 +124,6 @@ public class GD_DatMon extends javax.swing.JPanel {
         banTextField.setEditable(false);
         labelTongTien.setText("0,0 VNĐ");
         nhanVienName.setText(nv.getHoTen());
-        First_LoadData();
         Notifications.getInstance();
         FlatIntelliJLaf.setup();
     }
@@ -884,7 +885,7 @@ public class GD_DatMon extends javax.swing.JPanel {
                 utils.AppUtils.setLoadingForTable(scrollFoodList, true, loading, FoodList);
 
                 popular = new ArrayList<Mon>();
-                
+
                 try {
                     Map<Mon, Long> map = monDAO.findPopular();
                     for (Mon mon : map.keySet()) {
@@ -1120,13 +1121,12 @@ public class GD_DatMon extends javax.swing.JPanel {
                 orders = new ArrayList<Mon>();
                 //lấy danh sách chi tiết hóa đơn từ luồng thêm món nhờ hóa đơn (từ ordercard --> đặt món)
                 if (!branch.equals(TypeDatMon_Branch.DATMON)) {
-                    details = CHITIETHOADONDAO.getListByHoaDon(hoaDon);
+                    details = chitietDAO.getListByHoaDon(hoaDon);
                     for (ChiTietHoaDon d : details) { //duccuong1609 : này load trước mấy chi tiết hóa đơn lên
                         orders.add(d.getMon());
                         list_quantity.add(d.getSoLuong());
                     }
                 }
-
                 mons = new ArrayList<Mon>();
                 mons = monDAO.findService();
                 for (Mon mon : mons) {
@@ -1186,36 +1186,33 @@ public class GD_DatMon extends javax.swing.JPanel {
 //  NDK: t di chuyển lên trên lúc tạo biến rồi
         if (!orders.isEmpty()) {
             if (guiBep == true) {
-                using_for_DatMon(banDAO, hoaDonDAO, chitietDAO);
-                using_for_ThemMon(banDAO, hoaDonDAO, chitietDAO);
+                using_for_DatMon();
+                using_for_ThemMon();
             } else if (!branch.equals(TypeDatMon_Branch.DAT_TRUOC_MON)) {
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Vui Lòng Chọn Gửi Bếp !");
             }
-            using_for_DatTruocMon(chitietDAO, hoaDonDAO);
+            using_for_DatTruocMon();
         } else {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Vui Lòng Chọn Ít Nhất 1 Món Ăn Để Gửi Bếp !");
         }
     }
 
-    public void using_for_DatMon(IBanDAO banDAO, IHoaDonDAO hoaDonDAO, IChiTietHoaDonDAO chitietDAO) throws RemoteException {
+    public void using_for_DatMon() throws RemoteException {
         if (branch.equals(TypeDatMon_Branch.DATMON)) {
-            Ban ban = (Ban) banDAO.findById(this.ban.getMaBan(), Ban.class);
-            HoaDon hoaDon = new HoaDon(nv, LocalDateTime.now(), ban, utils.Enum.LoaiTrangThaiHoaDon.CHUA_THANH_TOAN);
+            Ban ban = (Ban) BANDAO.findById(this.ban.getMaBan(), Ban.class);
+            hoaDon = new HoaDon(nv, LocalDateTime.now(), ban, utils.Enum.LoaiTrangThaiHoaDon.CHUA_THANH_TOAN);
             hoaDon.setSoLuongNguoi(getSoLuong());
             if (loai.equals(DatMon_ThemMon.DATMON)) {
                 List<ChiTietHoaDon> list = new ArrayList<>();
-
                 for (int i = 0; i < orders.size(); i++) {
                     ChiTietHoaDon chiTiet = new ChiTietHoaDon(orders.get(i), hoaDon, list_quantity.get(i));
                     list.add(chiTiet);
+                    if (ghiChus.size() != -1) {
+                        chiTiet.setGhiChu(ghiChus.get(i));
+                    }
                 }
                 hoaDon.setChiTietHoaDon(list);
-                hoaDonDAO.insertHoaDon(hoaDon);
-
-                for (ChiTietHoaDon chiTiet : list) {
-                    chitietDAO.insert(chiTiet);
-                }
-
+                HOADONDAO.insertHoaDon(hoaDon);
             }
             ban.setTrangThai(utils.Enum.LoaiTrangThai.BAN_CO_KHACH);
             banDAO.update(ban);
@@ -1231,12 +1228,11 @@ public class GD_DatMon extends javax.swing.JPanel {
         }
     }
 
-    public void using_for_ThemMon(IBanDAO banDAO, IHoaDonDAO hoaDonDAO, IChiTietHoaDonDAO chitietDAO) throws RemoteException {
+    public void using_for_ThemMon() throws RemoteException {
         if (branch.equals(TypeDatMon_Branch.THEMMON)) {
             List<Mon> pre_order = new ArrayList<>();
             List<ChiTietHoaDon> list_canceled = chitietDAO.getListBySoLuong(0);
             hoaDon.setSoLuongNguoi(getSoLuong());
-
             hoaDonDAO.update(hoaDon);
             for (int i = 0; i < orders.size(); i++) {
                 int count = 0;
@@ -1290,7 +1286,7 @@ public class GD_DatMon extends javax.swing.JPanel {
 
     }
 
-    public void using_for_DatTruocMon(IChiTietHoaDonDAO chitietDAO, IHoaDonDAO hoadonDAO) throws RemoteException {
+    public void using_for_DatTruocMon() throws RemoteException {
         if (branch.equals(TypeDatMon_Branch.DAT_TRUOC_MON)) {
             hoaDon.setSoLuongNguoi(getSoLuong());
             details = chitietDAO.getListByHoaDon(hoaDon);
@@ -1309,7 +1305,7 @@ public class GD_DatMon extends javax.swing.JPanel {
             }
 
             hoaDon.setYeuCauDatMon(yeuCauDatMon);
-            hoadonDAO.update(hoaDon);
+            hoaDonDAO.update(hoaDon);
             if (back_toUI_DatBan == false) {
                 AppUtils.setUI(main, () -> {
                     try {
@@ -1385,6 +1381,8 @@ public class GD_DatMon extends javax.swing.JPanel {
 
     public void setHoaDon(HoaDon hoaDon) {
         this.hoaDon = hoaDon;
+        preLoad = true;
+        First_LoadData();
     }
 
     public void setBtnBack(MyButton btnBack) {
@@ -1501,5 +1499,13 @@ public class GD_DatMon extends javax.swing.JPanel {
 
     public void setUI() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<String> getGhiChus() {
+        return ghiChus;
+    }
+
+    public void setGhiChus(List<String> ghiChus) {
+        this.ghiChus = ghiChus;
     }
 }

@@ -303,19 +303,18 @@ public class OrderCard extends javax.swing.JPanel {
     private void panelRound3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound3MouseClicked
         // TODO add your handling code here:
         AppUtils.setUI(mainPanel, () -> {
-            GD_DatMon gD_DatMon;
+            GD_DatMon gD_DatMon = null;
             try {
                 gD_DatMon = new GD_DatMon(mainPanel, hoaDon.getBan(), utils.Enum.DatMon_ThemMon.THEMMON);
-                gD_DatMon.setHoaDon(this.hoaDon);
-                gD_DatMon.setGd_qlDatMon(ql_datMon);
-                if (!ql_datMon.isWaitForPayment()) {
-                    gD_DatMon.setBranch(utils.Enum.TypeDatMon_Branch.DAT_TRUOC_MON);
-                }
-                return gD_DatMon;
             } catch (RemoteException ex) {
                 Logger.getLogger(OrderCard.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return null;
+            gD_DatMon.setHoaDon(this.hoaDon);
+            gD_DatMon.setGd_qlDatMon(ql_datMon);
+            if (!ql_datMon.isWaitForPayment()) {
+                gD_DatMon.setBranch(utils.Enum.TypeDatMon_Branch.DAT_TRUOC_MON);
+            }
+            return gD_DatMon;
         });
     }//GEN-LAST:event_panelRound3MouseClicked
 

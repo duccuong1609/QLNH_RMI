@@ -10,6 +10,7 @@ import entity.ChiTietHoaDon;
 import entity.Mon;
 import icon.FontAwesome;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import jiconfont.swing.IconFontSwing;
@@ -364,13 +365,27 @@ public class Form_GhiChu extends javax.swing.JPanel {
     private void myButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myButton3ActionPerformed
         // TODO add your handling code here:
         List<ChiTietHoaDon> list = parent.getDatMon().getDetails();
-        for (ChiTietHoaDon c : list) {
-            if (c.getMon().getTenMon().equals(parent.getMon().getTenMon())) {
-                if (c.getGhiChu() == null) {
-                    c.setGhiChu("");
+        List<String> ghiChus = new ArrayList<>();
+        if (list != null) {
+            for (ChiTietHoaDon c : list) {
+                if (c.getMon().getTenMon().equals(parent.getMon().getTenMon())) {
+                    if (c.getGhiChu() == null) {
+                        c.setGhiChu("");
+                    }
+                    c.setGhiChu(c.getGhiChu() + txtGhiChu.getText());
                 }
-                c.setGhiChu(c.getGhiChu() + txtGhiChu.getText());
             }
+        }
+        if(list == null){
+            for(Mon mon : parent.getDatMon().getOrders()){
+               if (mon.getTenMon().equals(parent.getMon().getTenMon())) {
+                    ghiChus.add(txtGhiChu.getText());
+               } 
+               else{
+                   ghiChus.add(null);
+               }
+            }
+            parent.getDatMon().setGhiChus(ghiChus);
         }
         parent.getDatMon().setDetails(list);
         main.dispose();
@@ -379,10 +394,9 @@ public class Form_GhiChu extends javax.swing.JPanel {
 
     private void BoxLyDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxLyDoActionPerformed
         // TODO add your handling code here:
-        if (!parent.getType_orderItem().equals("PRELOAD")){
-            txtGhiChu.setText(" " + soLuog.getText() + " "+parent.getMon().getDonVi()+" " + BoxLyDo.getSelectedItem().toString());
-        }
-        else{
+        if (!parent.getType_orderItem().equals("PRELOAD")) {
+            txtGhiChu.setText(" " + soLuog.getText() + " " + parent.getMon().getDonVi() + " " + BoxLyDo.getSelectedItem().toString());
+        } else {
             BoxLyDo.setEditable(false);
             BoxLyDo.setSelectedIndex(0);
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Không được thay đổi ghi chú cho món đã đặt !");
@@ -402,14 +416,13 @@ public class Form_GhiChu extends javax.swing.JPanel {
                     soLuog.setText(Integer.toString(parent.getSoLuong()));
                     Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Số Lượng ghi chú không được lớn hơn số lượng đặt !");
                 }
-                txtGhiChu.setText(" " + soLuog.getText() + " "+parent.getMon().getDonVi()+" " + BoxLyDo.getSelectedItem().toString());
+                txtGhiChu.setText(" " + soLuog.getText() + " " + parent.getMon().getDonVi() + " " + BoxLyDo.getSelectedItem().toString());
             } catch (Exception e) {
                 soLuog.setText("1");
                 soLuog.requestFocus();
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Số Lượng nhập vào phải là số");
             }
-        }
-        else{
+        } else {
             soLuog.setText("1");
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Không được thay đổi ghi chú cho món đã đặt !");
         }
@@ -427,7 +440,7 @@ public class Form_GhiChu extends javax.swing.JPanel {
                 soLuog.setText(Integer.toString(parent.getSoLuong()));
                 Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Số Lượng ghi chú không được lớn hơn số lượng đặt !");
             }
-            txtGhiChu.setText(" " + soLuog.getText() + " "+parent.getMon().getDonVi()+" " + BoxLyDo.getSelectedItem().toString());
+            txtGhiChu.setText(" " + soLuog.getText() + " " + parent.getMon().getDonVi() + " " + BoxLyDo.getSelectedItem().toString());
         } else {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Không được thay đổi ghi chú cho món đã đặt !");
         }
@@ -454,7 +467,7 @@ public class Form_GhiChu extends javax.swing.JPanel {
                 quantity = 1;
             }
             soLuog.setText(Integer.toString(quantity));
-            txtGhiChu.setText(" " + soLuog.getText() + " "+parent.getMon().getDonVi()+" " + BoxLyDo.getSelectedItem().toString());
+            txtGhiChu.setText(" " + soLuog.getText() + " " + parent.getMon().getDonVi() + " " + BoxLyDo.getSelectedItem().toString());
         } else {
             Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_RIGHT, 1500, "Không được thay đổi ghi chú cho món đã đặt !");
         }
@@ -472,23 +485,26 @@ public class Form_GhiChu extends javax.swing.JPanel {
     }//GEN-LAST:event_minusMouseExited
     private void preLoad() {
         List<ChiTietHoaDon> list = parent.getDatMon().getDetails();
-        for (ChiTietHoaDon c : list) {
-            if (parent.getType_orderItem().equals("PRELOAD")) {
-                if (c.getMon().getTenMon().equals(parent.getMon().getTenMon())) {
-                    if (c.getGhiChu() == null) {
-                        txtGhiChu.setText("");
-                    } else {
-                        txtGhiChu.setText(c.getGhiChu());
+        if (list != null) {
+            for (ChiTietHoaDon c : list) {
+                if (parent.getType_orderItem().equals("PRELOAD")) {
+                    if (c.getMon().getTenMon().equals(parent.getMon().getTenMon())) {
+                        if (c.getGhiChu() == null) {
+                            txtGhiChu.setText("");
+                        } else {
+                            txtGhiChu.setText(c.getGhiChu());
+                        }
+                        txtGhiChu.setEditable(false);
                     }
-                    txtGhiChu.setEditable(false);
                 }
             }
         }
-        if(parent.getType_orderItem().equals("PRELOAD")){
+
+        if (parent.getType_orderItem().equals("PRELOAD")) {
             myButton3.setVisible(false);
             myButton4.setText("ĐÓNG");
             jLabel2.setText("Xem Lại Ghi Chú");
-            if(!txtGhiChu.getText().equals("")){
+            if (!txtGhiChu.getText().equals("")) {
                 soLuog.setText(txtGhiChu.getText().substring(1, 2));
             }
         }

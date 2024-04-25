@@ -18,12 +18,9 @@ import dao.imlp.MonDAO;
 import dao.imlp.NhanVienDAO;
 import dao.imlp.TaiKhoanDAO;
 import dao.imlp.TheThanhVienDAO;
-import entity.ChiTietHoaDon;
-import entity.KhachHang;
 import java.rmi.registry.LocateRegistry;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import utils.AppUtils;
 
 public class Server {
 

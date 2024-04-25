@@ -163,13 +163,15 @@ public class BanItem extends javax.swing.JPanel {
                             if (gD_Ban.getGd_Datmon() == null) {//chưa có thì tạo
                                 gd = new GD_DatMon(main, ban, utils.Enum.DatMon_ThemMon.DATMON);
                                 gd.setBranch(utils.Enum.TypeDatMon_Branch.DATMON);
+                                gd.First_LoadData();
                                 gd.setgD_Ban(gD_Ban);
                             } else {//có load vào rồi thì gọi lại
                                 gd = gD_Ban.getGd_Datmon();
+                                gd.First_LoadData();
                                 gd.getBtnBack().setBackground(new Color(83, 86, 99));
                             }
                             return gd;
-                        } catch (Exception e) {
+                        } catch (RemoteException e) {
                         }
                         return null;
                     });

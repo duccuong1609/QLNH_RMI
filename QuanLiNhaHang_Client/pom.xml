@@ -9,13 +9,7 @@
         <dependency>
             <groupId>dhcn</groupId>
             <artifactId>server</artifactId>
-            <version>1.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>DHCN</groupId>
-                    <artifactId>NguyenDucCuong_21114721_05</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>2</version>
         </dependency>
     </dependencies>
     <properties>

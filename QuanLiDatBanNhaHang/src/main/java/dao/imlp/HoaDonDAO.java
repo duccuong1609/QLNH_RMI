@@ -59,24 +59,22 @@ import utils.Enum.LoaiTrangThaiHoaDon;
 public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon> {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -7274837092975495869L;
-	private LocalDateTime timeNow = LocalDateTime.now();
+     *
+     */
+    private static final long serialVersionUID = -7274837092975495869L;
+    private LocalDateTime timeNow = LocalDateTime.now();
     private String month_format = String.format("%02d", timeNow.getMonthValue());
     private String date_format = String.format("%02d", timeNow.getDayOfMonth());
     private String hour_format = String.format("%02d", timeNow.getHour());
     private String generateTime = Integer.toString(timeNow.getYear()).substring(2, 4) + month_format + date_format + hour_format;
     private IChiTietHoaDonDAO chiTietHoaDonDAO = utils.AppUtils.CHITIETHOADONDAO;
     private DecimalFormat formatter = new DecimalFormat("###,###đ");
-    
+
     public HoaDonDAO() throws RemoteException {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-    
-    
-    
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
     public HoaDon findLast() throws RemoteException {
         return em.createNamedQuery("HoaDon.Last", HoaDon.class)
                 .getResultList()
@@ -112,13 +110,13 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
         return insert(hoaDon);
     }
 
-    public List<HoaDon> findOnOrder()  throws RemoteException{
+    public List<HoaDon> findOnOrder() throws RemoteException {
         return em.createNamedQuery("HoaDon.OnOrdering", HoaDon.class)
                 .setParameter("trangThai", LoaiTrangThaiHoaDon.CHUA_THANH_TOAN)
                 .getResultList();
     }
 
-    public List<HoaDon> findByState(Enum e)  throws RemoteException{
+    public List<HoaDon> findByState(Enum e) throws RemoteException {
         return em.createNamedQuery("HoaDon.OnOrdering", HoaDon.class)
                 .setParameter("trangThai", e)
                 .getResultList();
@@ -313,7 +311,7 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
     public double getTongDoanhThu(NhanVien nv) throws RemoteException {
         double sum = 0.0;
         String day = generateTime.substring(0, 6);
-        ChiTietHoaDonDAO tien = new ChiTietHoaDonDAO();
+        IChiTietHoaDonDAO tien = utils.AppUtils.CHITIETHOADONDAO;
         List<HoaDon> hd = findAll(HoaDon.class);
         for (HoaDon hd_total : hd) {
             if (nv.getMaNV().equals(hd_total.getNhanVien().getMaNV())) {
@@ -326,7 +324,7 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
         return sum;
     }
 
-    public DecimalFormat getFormatter() throws RemoteException{
+    public DecimalFormat getFormatter() throws RemoteException {
         return formatter;
     }
 
@@ -360,7 +358,7 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
     @Override
     public double getTongTienHoaDonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException {
         Double total = 0.0;
-        ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO();
+        IChiTietHoaDonDAO dao = utils.AppUtils.CHITIETHOADONDAO;
         List<HoaDon> list = findHoaDonTuNgayDenNgay(ngayBatDau, ngayKetThuc);
         for (int i = 0; i < list.size(); i++) {
             total += dao.TotalFoodCurrency(list.get(i));
@@ -372,7 +370,7 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
     public int getTongSoLuongMonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException {
         int soLuongMon = 0;
         List<HoaDon> list1 = findHoaDonTuNgayDenNgay(ngayBatDau, ngayKetThuc);
-        ChiTietHoaDonDAO dao = new ChiTietHoaDonDAO();
+        IChiTietHoaDonDAO dao = utils.AppUtils.CHITIETHOADONDAO;
         for (int i = 0; i < list1.size(); i++) {
             List<ChiTietHoaDon> list2 = new ArrayList<>();
             list2 = dao.getListByHoaDon(list1.get(i));
