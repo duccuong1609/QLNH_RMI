@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="src/main/java/lib/AbsoluteLayout.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/datechooser.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/icepdf-core-6.2.2.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/icepdf-viewer-6.2.2.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/jiconfont-1.0.0_1.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/jiconfont-swing-1.0.1.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/LIB_IDETS.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/lombok.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/swing-chart-1.1.0-beta.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/swing-toast-notifications-1.0.1.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/swing-worker-1.1.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/swingx-1.6.1.jar"/>
+	<classpathentry kind="lib" path="src/main/java/lib/TimingFramework-0.55.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
