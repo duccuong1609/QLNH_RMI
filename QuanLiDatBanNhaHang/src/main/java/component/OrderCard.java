@@ -152,7 +152,7 @@ public class OrderCard extends javax.swing.JPanel {
         tongTien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tongTien.setText("0");
 
-        iconEadting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/eating_icon.png"))); // NOI18N
+        iconEadting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eating_icon.png"))); // NOI18N
 
         javax.swing.GroupLayout panelRound8Layout = new javax.swing.GroupLayout(panelRound8);
         panelRound8.setLayout(panelRound8Layout);

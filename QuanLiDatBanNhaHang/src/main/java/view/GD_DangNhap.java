@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -30,22 +30,21 @@ public class GD_DangNhap extends javax.swing.JFrame {
     private INhanVienDAO nhanVienDAO;
     private ITaiKhoanDAO tk_dao;
 
-    public GD_DangNhap()  throws RemoteException{
+    public GD_DangNhap() throws RemoteException {
         initComponents();
         IconFontSwing.register(FontAwesome.getIconFont());
         iconUser.setIcon(IconFontSwing.buildIcon(FontAwesome.USER, 20, Color.WHITE));
         iconPass.setIcon(IconFontSwing.buildIcon(FontAwesome.LOCK, 20, Color.WHITE));
-        tenDangNhap.setBackground(new Color(0, 0, 0, 0));
-        matKhau.setBackground(new Color(0, 0, 0, 0));
+        tenDangNhap.setBackground(new Color(83, 86, 99));
+        matKhau.setBackground(new Color(83, 86, 99));
         userNameContaier.setBackground(new Color(83, 86, 99));
         passContaier.setBackground(new Color(83, 86, 99));
         setLocationRelativeTo(null);
         Notifications.getInstance().setJFrame(this);
         FlatIntelliJLaf.setup();
-        
+
 //        AppUtils app = new AppUtils(); 
 // bat cai nay len neu khong chay server
-        
         nhanVienDAO = NHANVIENDAO;
         tk_dao = TAIKHOANDAO;
         //---------------------------------------------
@@ -100,21 +99,19 @@ public class GD_DangNhap extends javax.swing.JFrame {
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo_2.png"))); // NOI18N
 
         btnDangNhap.setBackground(new java.awt.Color(31, 29, 43));
+        btnDangNhap.setBorder(null);
         btnDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         btnDangNhap.setText("Đăng nhập");
         btnDangNhap.setColor(new java.awt.Color(31, 29, 43));
         btnDangNhap.setColorClick(new java.awt.Color(234, 124, 105));
         btnDangNhap.setColorOver(new java.awt.Color(234, 124, 105));
+        btnDangNhap.setFocusPainted(false);
         btnDangNhap.setFont(utils.AppUtils.getFont(20f, _NORMAL_)
         );
         btnDangNhap.setRadius(50);
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btnDangNhapActionPerformed(evt);
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
+                try{btnDangNhapActionPerformed(evt);}catch(Exception e){}
             }
         });
 

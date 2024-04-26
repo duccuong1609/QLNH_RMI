@@ -134,7 +134,7 @@ public class Form_XemThucDon extends javax.swing.JPanel {
         title.setForeground(new java.awt.Color(255, 255, 255));
         title.setText("Xem thực đơn");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_close.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icon_close.png"))); // NOI18N
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
@@ -253,7 +253,6 @@ public class Form_XemThucDon extends javax.swing.JPanel {
         panelRound1.setRoundTopLeft(8);
         panelRound1.setRoundTopRight(8);
 
-        filterCombox.setBackground(new java.awt.Color(255, 255, 255));
         filterCombox.setFont(utils.AppUtils.getFont(16f, _NORMAL_));
         filterCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Hay dùng", "Món ăn", "Đồ uống", "Khác" }));
         filterCombox.setBorder(null);
@@ -283,7 +282,6 @@ public class Form_XemThucDon extends javax.swing.JPanel {
         panelRound2.setRoundTopLeft(8);
         panelRound2.setRoundTopRight(8);
 
-        txtSearch.setBackground(new java.awt.Color(255, 255, 255));
         txtSearch.setBorder(null);
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {

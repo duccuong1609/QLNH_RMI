@@ -162,7 +162,7 @@ public class Form_DatBan extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Đặt chỗ");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_close.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icon_close.png"))); // NOI18N
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
@@ -176,7 +176,7 @@ public class Form_DatBan extends javax.swing.JPanel {
             .addGroup(headerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 707, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addContainerGap())
         );

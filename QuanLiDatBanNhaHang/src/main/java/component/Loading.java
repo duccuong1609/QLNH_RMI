@@ -17,14 +17,12 @@ public class Loading extends javax.swing.JPanel {
      */
     public Loading() {
         initComponents();
-        String imagePath = "./src/main/resources/icons/loading_final.gif";
 
         // Tạo một ImageIcon từ đường dẫn ảnh
-        ImageIcon icon = new javax.swing.ImageIcon(imagePath);
+        ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/icons/loading_final.gif"));
+
         this.icon.setIcon(icon);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

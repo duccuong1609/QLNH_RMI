@@ -388,18 +388,14 @@ public class GD_DatBanTruoc extends javax.swing.JPanel {
         btnThayDoi.setText("Thay đổi");
         btnThayDoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    btnThayDoiMouseClicked(evt);
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
+                try{btnThayDoiMouseClicked(evt);}catch(Exception e){}
             }
         });
 
         btnHuyCho.setFont(utils.AppUtils.getFont(16f, _NORMAL_)
         );
         btnHuyCho.setForeground(new java.awt.Color(255, 255, 255));
-        btnHuyCho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_close.png"))); // NOI18N
+        btnHuyCho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icon_close.png"))); // NOI18N
         btnHuyCho.setText("Hủy đặt chỗ");
         btnHuyCho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

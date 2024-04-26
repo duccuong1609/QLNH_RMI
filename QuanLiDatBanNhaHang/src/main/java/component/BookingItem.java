@@ -118,7 +118,7 @@ public class BookingItem extends javax.swing.JPanel {
         left.setLayout(new java.awt.GridLayout(1, 5));
 
         btnSapCho.setBorder(null);
-        btnSapCho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/table_icon.png"))); // NOI18N
+        btnSapCho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/table_icon.png"))); // NOI18N
         btnSapCho.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSapCho.setMaximumSize(new java.awt.Dimension(30, 60));
         btnSapCho.setMinimumSize(new java.awt.Dimension(30, 60));
@@ -132,7 +132,7 @@ public class BookingItem extends javax.swing.JPanel {
         left.add(btnSapCho);
 
         btnGoiMon.setBorder(null);
-        btnGoiMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/fork_icon.png"))); // NOI18N
+        btnGoiMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/fork_icon.png"))); // NOI18N
         btnGoiMon.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnGoiMon.setMaximumSize(new java.awt.Dimension(30, 60));
         btnGoiMon.setMinimumSize(new java.awt.Dimension(30, 60));

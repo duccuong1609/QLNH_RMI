@@ -30,6 +30,7 @@ import entity.NhanVien;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.File;
+import java.io.InputStream;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
@@ -58,11 +59,11 @@ public class AppUtils {
     public static ITheThanhVienDAO THETHANHVIENDAO;
     public static NhanVien NHANVIEN = null;
     public static DecimalFormat tien_format = new DecimalFormat("###,### VNĐ");
-    public static String _NORMAL_ = "src/main/java/font/OpenSans-VariableFont_wdth,wght.ttf";
-    public static String _BOLD_ = "src/main/java/font/OpenSans_Condensed-ExtraBold.ttf";
-    public static String _ITALIC_ = "src/main/java/font/OpenSans-Italic-VariableFont_wdth,wght.ttf";
+    public static String _NORMAL_ = "/font/OpenSans-VariableFont_wdth,wght.ttf";
+    public static String _BOLD_ = "/font/OpenSans_Condensed-ExtraBold.ttf";
+    public static String _ITALIC_ = "/font/OpenSans-Italic-VariableFont_wdth,wght.ttf";
 
-    public AppUtils() throws RemoteException{
+    public AppUtils() throws RemoteException {
         NHANVIENDAO = new NhanVienDAO();
         TAIKHOANDAO = new TaiKhoanDAO();
         BANDAO = new BanDAO();
@@ -77,8 +78,9 @@ public class AppUtils {
 
     public static Font getFont(float a, String b) {
         try {
-            File fontStyle = new File(b);
-            Font font = Font.createFont(Font.TRUETYPE_FONT, fontStyle).deriveFont(a);
+            InputStream inputStream = AppUtils.class.getResourceAsStream(b);
+//            File fontStyle = new File(getClass().getResource("/icons/loading_final.gif"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(a);
             return font;
         } catch (Exception e) {
         }
