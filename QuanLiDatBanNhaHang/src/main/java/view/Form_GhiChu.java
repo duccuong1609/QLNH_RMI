@@ -366,24 +366,35 @@ public class Form_GhiChu extends javax.swing.JPanel {
         // TODO add your handling code here:
         List<ChiTietHoaDon> list = parent.getDatMon().getDetails();
         List<String> ghiChus = new ArrayList<>();
+
         if (list != null) {
-            for (ChiTietHoaDon c : list) {
-                if (c.getMon().getTenMon().equals(parent.getMon().getTenMon())) {
-                    if (c.getGhiChu() == null) {
-                        c.setGhiChu("");
+            if (parent.getDatMon().getBranch().equals(utils.Enum.TypeDatMon_Branch.DAT_TRUOC_MON)) {
+                for (Mon mon : parent.getDatMon().getOrders()) {
+                    if (mon.getTenMon().equals(parent.getMon().getTenMon())) {
+                        ghiChus.add(txtGhiChu.getText());
+                    } else {
+                        ghiChus.add(null);
                     }
-                    c.setGhiChu(c.getGhiChu() + txtGhiChu.getText());
+                }
+                parent.getDatMon().setGhiChus(ghiChus);
+            } else {
+                for (ChiTietHoaDon c : list) {
+                    if (c.getMon().getTenMon().equals(parent.getMon().getTenMon())) {
+                        if (c.getGhiChu() == null) {
+                            c.setGhiChu("");
+                        }
+                        c.setGhiChu(c.getGhiChu() + txtGhiChu.getText());
+                    }
                 }
             }
         }
-        if(list == null){
-            for(Mon mon : parent.getDatMon().getOrders()){
-               if (mon.getTenMon().equals(parent.getMon().getTenMon())) {
+        if (list == null) {
+            for (Mon mon : parent.getDatMon().getOrders()) {
+                if (mon.getTenMon().equals(parent.getMon().getTenMon())) {
                     ghiChus.add(txtGhiChu.getText());
-               } 
-               else{
-                   ghiChus.add(null);
-               }
+                } else {
+                    ghiChus.add(null);
+                }
             }
             parent.getDatMon().setGhiChus(ghiChus);
         }
@@ -506,6 +517,19 @@ public class Form_GhiChu extends javax.swing.JPanel {
             jLabel2.setText("Xem Lại Ghi Chú");
             if (!txtGhiChu.getText().equals("")) {
                 soLuog.setText(txtGhiChu.getText().substring(1, 2));
+            }
+        }
+
+        if (parent.getDatMon().getBranch().equals(utils.Enum.TypeDatMon_Branch.DAT_TRUOC_MON)) {
+            for (ChiTietHoaDon c : list) {
+                if (c.getMon().getTenMon().equals(parent.getMon().getTenMon())) {
+                    if (c.getGhiChu() == null) {
+                        txtGhiChu.setText("");
+                    } else {
+                        txtGhiChu.setText(c.getGhiChu());
+                    }
+                    txtGhiChu.setEditable(false);
+                }
             }
         }
     }

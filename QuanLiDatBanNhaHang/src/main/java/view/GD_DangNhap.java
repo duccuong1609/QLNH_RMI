@@ -43,7 +43,7 @@ public class GD_DangNhap extends javax.swing.JFrame {
         Notifications.getInstance().setJFrame(this);
         FlatIntelliJLaf.setup();
         
-//        AppUtils app = new AppUtils(); 
+        AppUtils app = new AppUtils(); 
 // bat cai nay len neu khong chay server
         
         nhanVienDAO = NHANVIENDAO;

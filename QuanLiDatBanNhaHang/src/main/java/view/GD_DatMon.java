@@ -1287,14 +1287,22 @@ public class GD_DatMon extends javax.swing.JPanel {
     }
 
     public void using_for_DatTruocMon() throws RemoteException {
+        if(ghiChus==null){
+            ghiChus = new ArrayList<>();
+        }
         if (branch.equals(TypeDatMon_Branch.DAT_TRUOC_MON)) {
             hoaDon.setSoLuongNguoi(getSoLuong());
-            details = chitietDAO.getListByHoaDon(hoaDon);
+            if(details.size()==-1)
+                details = chitietDAO.getListByHoaDon(hoaDon);
             for (ChiTietHoaDon detail : details) {
                 chitietDAO.deleteChiTiet(detail);
             }
             for (int i = 0; i < orders.size(); i++) {
-                chitietDAO.insert(new ChiTietHoaDon(orders.get(i), hoaDon, list_quantity.get(i)));
+                ChiTietHoaDon item = new ChiTietHoaDon(orders.get(i), hoaDon, list_quantity.get(i));
+                if(ghiChus.size()<=i){
+                    item.setGhiChu(ghiChus.get(i));
+                }
+                chitietDAO.insert(item);
             }
 
             List<ChiTietHoaDon> dsChiTietHoaDon = chitietDAO.getListByHoaDon(hoaDon);
