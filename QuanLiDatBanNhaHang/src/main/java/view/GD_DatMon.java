@@ -1232,8 +1232,7 @@ public class GD_DatMon extends javax.swing.JPanel {
         if (branch.equals(TypeDatMon_Branch.THEMMON)) {
             List<Mon> pre_order = new ArrayList<>();
             List<ChiTietHoaDon> list_canceled = chitietDAO.getListBySoLuong(0);
-            hoaDon.setSoLuongNguoi(getSoLuong());
-            hoaDonDAO.update(hoaDon);
+            
             for (int i = 0; i < orders.size(); i++) {
                 int count = 0;
                 for (int j = 0; j < orders.size(); j++) {
@@ -1272,6 +1271,11 @@ public class GD_DatMon extends javax.swing.JPanel {
                     chitietDAO.insert(chiTiet);
                 }
             }
+            
+            hoaDon.setSoLuongNguoi(getSoLuong());
+            hoaDon.setChiTietHoaDon(updateTien(hoaDon));
+            hoaDonDAO.update(hoaDon);
+            
             AppUtils.setUI(main, () -> {
                 try {
                     return new GD_DatBanTaiCho(main, nv);
@@ -1515,5 +1519,10 @@ public class GD_DatMon extends javax.swing.JPanel {
 
     public void setGhiChus(List<String> ghiChus) {
         this.ghiChus = ghiChus;
+    }
+    
+    public List<ChiTietHoaDon> updateTien(HoaDon hoaDon) throws RemoteException{
+        List<ChiTietHoaDon> list = CHITIETHOADONDAO.getListByHoaDon(hoaDon);
+        return list;
     }
 }

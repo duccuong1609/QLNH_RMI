@@ -25,7 +25,7 @@ import java.rmi.RemoteException;
 import view.GD_DangNhap;
 
 public class Client {
-    private static final String URL = "rmi://KURO-PC:4361/";
+    private static final String URL = "rmi://DESKTOP-B2M7ONV:4361/";
 
     public static void main(String[] args) {
         try {

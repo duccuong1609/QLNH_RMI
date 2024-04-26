@@ -164,7 +164,7 @@ public class Form_ThuTien extends javax.swing.JPanel {
         title.setForeground(new java.awt.Color(255, 255, 255));
         title.setText("Thu tiền");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon_close.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icon_close.png"))); // NOI18N
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel11MouseClicked(evt);
@@ -211,7 +211,6 @@ public class Form_ThuTien extends javax.swing.JPanel {
         panelRound1.setRoundTopLeft(8);
         panelRound1.setRoundTopRight(8);
 
-        txtTienKhachDua.setBackground(new java.awt.Color(255, 255, 255));
         txtTienKhachDua.setFont(utils.AppUtils.getFont(16f, _NORMAL_));
         txtTienKhachDua.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTienKhachDua.setText("0");

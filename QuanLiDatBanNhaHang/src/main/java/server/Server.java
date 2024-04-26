@@ -24,7 +24,7 @@ import javax.naming.InitialContext;
 
 public class Server {
 
-    private static final String URL = "rmi://KURO-PC:4361/";
+    private static final String URL = "rmi://LAPTOP-6J8TDF9B:4361/";
 
     public static void main(String[] args) {
         try {
