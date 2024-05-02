@@ -60,7 +60,7 @@ public class GD_DatBanTruoc extends javax.swing.JPanel {
     private JFrame jFrameForm;
     private int statePhieuDatBan = 0;
 
-    public GD_DatBanTruoc(JPanel jPanel) throws RemoteException{
+    public GD_DatBanTruoc(JPanel jPanel) throws RemoteException {
         this.mainJPanel = jPanel;
         initComponents();
         IconFontSwing.register(FontAwesome.getIconFont());
@@ -708,7 +708,7 @@ public class GD_DatBanTruoc extends javax.swing.JPanel {
             // TODO add your handling code here:
 //      NDK change here
 
-this.deleteBooking();
+            this.deleteBooking();
         } catch (RemoteException ex) {
             Logger.getLogger(GD_DatBanTruoc.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -772,6 +772,12 @@ this.deleteBooking();
             if (bookingItems.get(active).getHoaDon().getTrangThai().ordinal() == utils.Enum.LoaiTrangThaiHoaDon.DAT_TRUOC.ordinal()) {
                 hoaDonDAO.updateStateById(bookingItems.get(active).getHoaDon().getMaHoaDon(), utils.Enum.LoaiTrangThaiHoaDon.HUY_BO);
                 banDAO.updateStateById(bookingItems.get(active).getHoaDon().getBan().getMaBan(), utils.Enum.LoaiTrangThai.BAN_TRONG);
+                HoaDon hd = bookingItems.get(active).getHoaDon();
+                Ban ban = bookingItems.get(active).getHoaDon().getBan();
+                hd.setTrangThai(utils.Enum.LoaiTrangThaiHoaDon.HUY_BO);
+                ban.setTrangThai(utils.Enum.LoaiTrangThai.BAN_TRONG);
+                hoaDonDAO.update(hd);
+                banDAO.update(ban);
                 HoaDon hoaDon = bookingItems.get(active).getHoaDon();
                 if (hoaDon != null) {
                     hoaDonDAO.updateStateById(hoaDon.getMaHoaDon(), utils.Enum.LoaiTrangThaiHoaDon.HUY_BO);

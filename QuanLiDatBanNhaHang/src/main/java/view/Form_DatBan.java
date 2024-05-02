@@ -837,7 +837,9 @@ public class Form_DatBan extends javax.swing.JPanel {
             phieuDatBan.setChiTietHoaDon(getListDetails(phieuDatBan));
             boolean isSuccess = hoaDonDAO.insertHoaDon(phieuDatBan);
             if (isSuccess) {
-                banDAO.updateStateById(ban.getMaBan(), utils.Enum.LoaiTrangThai.BAN_DA_DUOC_DAT);
+                ban.setTrangThai(utils.Enum.LoaiTrangThai.BAN_DA_DUOC_DAT);
+                banDAO.update(ban);
+//                banDAO.updateStateById(ban.getMaBan(), utils.Enum.LoaiTrangThai.BAN_DA_DUOC_DAT);
                 Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_RIGHT, 1500, "Đặt bàn thành công");
                 jFrame.setVisible(false);
                 jFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

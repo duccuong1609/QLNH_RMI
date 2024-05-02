@@ -18,14 +18,15 @@ import dao.imlp.MonDAO;
 import dao.imlp.NhanVienDAO;
 import dao.imlp.TaiKhoanDAO;
 import dao.imlp.TheThanhVienDAO;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 public class Server {
 
-    private static final String URL = "rmi://LAPTOP-6J8TDF9B:4361/";
-
+    private static final String URL = "rmi://DESKTOP-B2M7ONV:4361/";
     public static void main(String[] args) {
         try {
             Context context = new InitialContext();
@@ -51,7 +52,7 @@ public class Server {
             context.bind(URL + "monDAO", monDAO);
             context.bind(URL + "theThanhVienDAO", theThanhVienDAO);
             System.out.println("Server is running...");
-        } catch (Exception e) {
+        } catch (RemoteException | NamingException e) {
             e.printStackTrace();
         }
 

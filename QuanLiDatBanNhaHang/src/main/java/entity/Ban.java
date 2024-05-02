@@ -56,4 +56,6 @@ public class Ban implements Serializable{
     private String tang;
     @OneToMany(mappedBy = "ban",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<HoaDon> hoaDon;
+    
+    
 }

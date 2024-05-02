@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import jiconfont.swing.IconFontSwing;
 import raven.toast.Notifications;
 import static utils.AppUtils.*;
-import utils.*;
 
 /**
  *
@@ -43,7 +42,7 @@ public class GD_DangNhap extends javax.swing.JFrame {
         Notifications.getInstance().setJFrame(this);
         FlatIntelliJLaf.setup();
 
-        AppUtils app = new AppUtils(); 
+//        AppUtils app = new AppUtils(); 
 //      bat cai nay len neu khong chay server
         nhanVienDAO = NHANVIENDAO;
         tk_dao = TAIKHOANDAO;

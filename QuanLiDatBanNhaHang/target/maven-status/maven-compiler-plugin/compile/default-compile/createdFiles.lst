@@ -28,6 +28,7 @@ component\WrapLayout.class
 component\OrderCard.class
 component\BookingItem$1.class
 utils\Enum$LoaiVaiTro.class
+view\GD_DatBanTaiCho$11.class
 view\GD_DatBanTruoc$11.class
 view\GD_TrangChu$8.class
 view\Form_QRCODE.class

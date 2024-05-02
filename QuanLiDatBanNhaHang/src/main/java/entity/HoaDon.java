@@ -46,7 +46,7 @@ public class HoaDon implements Serializable{
     @Id
     @Column(name = "MaHoaDon", nullable = false)
     private String maHoaDon;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "MaNhanVien", nullable = false)
     private NhanVien nhanVien;
     @ManyToOne(fetch = FetchType.LAZY)

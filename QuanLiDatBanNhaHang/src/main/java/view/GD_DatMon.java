@@ -1207,8 +1207,9 @@ public class GD_DatMon extends javax.swing.JPanel {
                 for (int i = 0; i < orders.size(); i++) {
                     ChiTietHoaDon chiTiet = new ChiTietHoaDon(orders.get(i), hoaDon, list_quantity.get(i));
                     list.add(chiTiet);
-                    if (ghiChus.size() != -1) {
-                        chiTiet.setGhiChu(ghiChus.get(i));
+                    if (ghiChus != null) {
+                        if(ghiChus.size()<i)
+                            chiTiet.setGhiChu(ghiChus.get(i));
                     }
                 }
                 hoaDon.setChiTietHoaDon(list);

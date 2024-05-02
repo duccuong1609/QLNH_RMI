@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author dmx
  */
-public interface IHoaDonDAO<T> extends GenericDAO<T>,Remote {
+public interface IHoaDonDAO<T> extends GenericDAO<T>, Remote {
 
     HoaDon findLast() throws RemoteException;
 
@@ -34,16 +34,21 @@ public interface IHoaDonDAO<T> extends GenericDAO<T>,Remote {
 //    use to move from this table to other table
     boolean updateBanById(String id, Ban ban) throws RemoteException;
 
-    void createInvoice(HoaDon hoaDon, double tienKhachTra, double tienThua) throws RemoteException;
+    void createInvoice(String hoaDon, double tienKhachTra, double tienThua) throws RemoteException;
+
     double getTongDoanhThu(NhanVien nv) throws RemoteException;
-    List<HoaDon> findHoaDonTuNgayDenNgay(LocalDateTime ngayBatDau,LocalDateTime ngayKetThuc) throws RemoteException;
-    
-    int getTongHoaDonTheoNgay(LocalDateTime ngayBatDau,LocalDateTime ngayKetThuc) throws RemoteException;
-    double getTongTienHoaDonTheoNgay(LocalDateTime ngayBatDau,LocalDateTime ngayKetThuc) throws RemoteException;
-    int getTongSoLuongMonTheoNgay(LocalDateTime ngayBatDau,LocalDateTime ngayKetThuc) throws RemoteException;
-    
+
+    List<HoaDon> findHoaDonTuNgayDenNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException;
+
+    int getTongHoaDonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException;
+
+    double getTongTienHoaDonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException;
+
+    int getTongSoLuongMonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException;
+
     List<HoaDon> filterByDate(LocalDate date) throws RemoteException;
-    
+
     public int getTongHoaDon(NhanVien nv) throws RemoteException;
+
     public DecimalFormat getFormatter() throws RemoteException;
 }

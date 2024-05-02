@@ -161,24 +161,28 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
     }
 
     @Override
-    public void createInvoice(HoaDon hoaDon, double tienKhachTra, double tienThua) {
-
+    public void createInvoice(String maHoaDon, double tienKhachTra, double tienThua) {
         PdfWriter pdfWriter = null;
-
+        HoaDon hoaDon = null;
         try {
-            String path = "invoice.pdf";
+            hoaDon = findById(maHoaDon, HoaDon.class);
+        } catch (RemoteException ex) {
+            Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            String path = "D:\\Dowload\\invoice.pdf";
             pdfWriter = new PdfWriter(path);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             pdfDocument.setDefaultPageSize(PageSize.A4);
             Document document = new Document(pdfDocument);
-            PdfFont font = PdfFontFactory.createFont("src/main/java/font/OpenSans-VariableFont_wdth,wght.ttf", PdfEncodings.IDENTITY_H);
+            PdfFont font = PdfFontFactory.createFont("D:\\Dowload\\OpenSans-VariableFont_wdth,wght.ttf", PdfEncodings.IDENTITY_H);
             float pageWidth = pdfDocument.getDefaultPageSize().getWidth() - 70;
             document.setFont(font);
 
             document.add(new Paragraph("KTQD Gò vấp - 244 Lê Văn Thọ").setTextAlignment(TextAlignment.CENTER).setBold().setMargin(0));
             document.add(new Paragraph("246, Lê Văn Thọ, Phường 11, Q.Gò Vấp").setTextAlignment(TextAlignment.CENTER).setMargin(0));
             document.add(new Paragraph("Thành phố Hồ Chí Minh    Hotline: 0902 777 600").setTextAlignment(TextAlignment.CENTER).setMargin(0));
-            document.add(new Image(ImageDataFactory.create("./src/main/resources/images/logo_2.png")).setHorizontalAlignment(HorizontalAlignment.CENTER));
+            document.add(new Image(ImageDataFactory.create("D:\\Dowload\\logo_2.png")).setHorizontalAlignment(HorizontalAlignment.CENTER));
             document.add(new Paragraph("PHIẾU HÓA ĐƠN").setTextAlignment(TextAlignment.CENTER).setBold().setMargin(0));
             document.add(new Paragraph("Số: " + hoaDon.getMaHoaDon()).setTextAlignment(TextAlignment.CENTER).setBold().setMargin(0));
 //          ---Ngày---
@@ -250,8 +254,6 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -259,7 +261,7 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
             if (pdfWriter != null) {
                 try {
                     pdfWriter.close();
-                    Files.deleteIfExists(Paths.get("invoice.pdf"));
+                    Files.deleteIfExists(Paths.get("D:\\Dowload\\invoice.pdf"));
                 } catch (IOException ex) {
                     Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -356,24 +358,32 @@ public class HoaDonDAO extends AbstractDAO<HoaDon> implements IHoaDonDAO<HoaDon>
     }
 
     @Override
-    public double getTongTienHoaDonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException {
+    public double getTongTienHoaDonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) {
         Double total = 0.0;
         IChiTietHoaDonDAO dao = utils.AppUtils.CHITIETHOADONDAO;
         List<HoaDon> list = findHoaDonTuNgayDenNgay(ngayBatDau, ngayKetThuc);
         for (int i = 0; i < list.size(); i++) {
-            total += dao.TotalFoodCurrency(list.get(i));
+            try {
+                total += dao.TotalFoodCurrency(list.get(i));
+            } catch (RemoteException ex) {
+                Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return total;
     }
 
     @Override
-    public int getTongSoLuongMonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) throws RemoteException {
+    public int getTongSoLuongMonTheoNgay(LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc) {
         int soLuongMon = 0;
         List<HoaDon> list1 = findHoaDonTuNgayDenNgay(ngayBatDau, ngayKetThuc);
         IChiTietHoaDonDAO dao = utils.AppUtils.CHITIETHOADONDAO;
         for (int i = 0; i < list1.size(); i++) {
             List<ChiTietHoaDon> list2 = new ArrayList<>();
-            list2 = dao.getListByHoaDon(list1.get(i));
+            try {
+                list2 = dao.getListByHoaDon(list1.get(i));
+            } catch (RemoteException ex) {
+                Logger.getLogger(HoaDonDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (int j = 0; j < list2.size(); j++) {
                 soLuongMon += list2.get(j).getSoLuong();
             }

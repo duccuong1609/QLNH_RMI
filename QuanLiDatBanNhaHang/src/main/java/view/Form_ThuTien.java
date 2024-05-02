@@ -10,6 +10,7 @@ import dao.IChiTietHoaDonDAO;
 import dao.IHoaDonDAO;
 import dao.IMonDAO;
 import dao.ITheThanhVienDAO;
+import entity.Ban;
 import entity.HoaDon;
 import entity.TheThanhVien;
 import icon.FontAwesome;
@@ -772,7 +773,7 @@ public class Form_ThuTien extends javax.swing.JPanel {
         String tien = tienPhaiTra.getText().replace("VNĐ", "");
         tien = tien.replace(",", "");
         double tienThua = Double.parseDouble(tien);
-        hoaDonDAO.createInvoice(hoaDon, total + tienThua, tienThua);
+        hoaDonDAO.createInvoice(hoaDon.getMaHoaDon(), total + tienThua, tienThua);
     }
     
     //duccuong1609 : khuyenmai thanh nhieu nhieu voi hoa don roi
@@ -796,7 +797,9 @@ public class Form_ThuTien extends javax.swing.JPanel {
 //        hoaDon.setKhuyenMai(khuyenMais);
         hoaDon.setTrangThai(utils.Enum.LoaiTrangThaiHoaDon.DA_THANH_TOAN);
         hoaDonDAO.update(hoaDon);
-        banDAO.updateStateById(hoaDon.getBan().getMaBan(), utils.Enum.LoaiTrangThai.BAN_TRONG);
+        Ban ban = hoaDon.getBan();
+        ban.setTrangThai(utils.Enum.LoaiTrangThai.BAN_TRONG);
+        banDAO.update(ban);
     }
 
     public void setMainJPanel(JPanel jPanel) {

@@ -26,6 +26,9 @@ import static utils.AppUtils.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,10 +47,11 @@ public class GD_DatBanTaiCho extends javax.swing.JPanel {
     private List<HoaDon> hoadons;
     private IChiTietHoaDonDAO chiTietHoaDonDAO = CHITIETHOADONDAO;
     private boolean waitForPayment = true;
+    private int size = hoaDonDAO.findAll(HoaDon.class).size();
 //    NDK create a list ccontains tabs
     private List<JButton> tabs = new ArrayList<>();
 
-    public GD_DatBanTaiCho(JPanel main, NhanVien nv) throws RemoteException{
+    public GD_DatBanTaiCho(JPanel main, NhanVien nv) throws RemoteException {
         this.mainPanel = main;
         initComponents();
         txtMaBan.setBackground(new Color(0, 0, 0, 1));
@@ -66,6 +70,7 @@ public class GD_DatBanTaiCho extends javax.swing.JPanel {
         tabs.add(btnCheckout);
         tabs.add(btnReserve);
         loadData();
+        auto();
     }
 
     /**
@@ -551,11 +556,38 @@ public class GD_DatBanTaiCho extends javax.swing.JPanel {
     }
 
     private void loadData() throws RemoteException {
+        main.removeAll();
         loadOrdering();
         setInitActive(tabs.get(0));
         setTextBtns(btnCheckout, utils.Enum.LoaiTrangThaiHoaDon.CHUA_THANH_TOAN, "Chờ thanh toán (");
         setTextBtns(btnReserve, utils.Enum.LoaiTrangThaiHoaDon.DAT_TRUOC, "Đặt trước (");
         orderNumber.setText(hoaDonDAO.findByState(utils.Enum.LoaiTrangThaiHoaDon.CHUA_THANH_TOAN).size() + "");
+
+    }
+
+    private void auto() {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            boolean isRun = true;
+
+            @Override
+            public void run() {
+                try {
+
+                    if (hoaDonDAO.findAll(HoaDon.class).size() > size || hoaDonDAO.findAll(HoaDon.class).size() < size) {
+                        isRun = true;
+                        size = hoaDonDAO.findAll(HoaDon.class).size();
+                    }
+                    if (isRun) {
+                        main.removeAll();
+                        loadOrdering();
+                        isRun = false;
+                    }
+                } catch (RemoteException ex) {
+                    Logger.getLogger(GD_DatBanTaiCho.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     private void setTextBtns(JButton btn, Enum e, String content) throws RemoteException {
