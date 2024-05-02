@@ -13,27 +13,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import utils.Enum.LoaiVaiTro;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
  * @author Laptop
  */
 @Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
 public class NhanVien implements Serializable{
 
-    @Id
+    private static final long serialVersionUID = -5563164641455405164L;
+	@Id
     @Column(name = "MaNhanVien", nullable = false)
     private String maNV;
     @Column(name = "HoTen", columnDefinition = "NVARCHAR(50)", nullable = false)
@@ -56,7 +48,6 @@ public class NhanVien implements Serializable{
     @OneToMany(mappedBy = "nhanVien", cascade = CascadeType.ALL)
     private List<HoaDon> hoaDon;
     @OneToOne(mappedBy = "nhanVien", cascade = CascadeType.ALL)
-    @ToString.Exclude
     private TaiKhoan taiKhoan;
 
     public NhanVien(String hoTen, String diaChi, boolean trangThai, int tuoi, String soDienThoai, LocalDateTime ngayBatDauLam, LoaiVaiTro vaiTro, boolean gioiTinh) {
@@ -69,5 +60,96 @@ public class NhanVien implements Serializable{
         this.vaiTro = vaiTro;
         this.gioiTinh = gioiTinh;
     }
+
+	public String getMaNV() {
+		return maNV;
+	}
+
+	public void setMaNV(String maNV) {
+		this.maNV = maNV;
+	}
+
+	public String getHoTen() {
+		return hoTen;
+	}
+
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
+
+	public String getDiaChi() {
+		return diaChi;
+	}
+
+	public void setDiaChi(String diaChi) {
+		this.diaChi = diaChi;
+	}
+
+	public boolean isTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(boolean trangThai) {
+		this.trangThai = trangThai;
+	}
+
+	public int getTuoi() {
+		return tuoi;
+	}
+
+	public void setTuoi(int tuoi) {
+		this.tuoi = tuoi;
+	}
+
+	public String getSoDienThoai() {
+		return soDienThoai;
+	}
+
+	public void setSoDienThoai(String soDienThoai) {
+		this.soDienThoai = soDienThoai;
+	}
+
+	public LocalDateTime getNgayBatDauLam() {
+		return ngayBatDauLam;
+	}
+
+	public void setNgayBatDauLam(LocalDateTime ngayBatDauLam) {
+		this.ngayBatDauLam = ngayBatDauLam;
+	}
+
+	public LoaiVaiTro getVaiTro() {
+		return vaiTro;
+	}
+
+	public void setVaiTro(LoaiVaiTro vaiTro) {
+		this.vaiTro = vaiTro;
+	}
+
+	public boolean isGioiTinh() {
+		return gioiTinh;
+	}
+
+	public void setGioiTinh(boolean gioiTinh) {
+		this.gioiTinh = gioiTinh;
+	}
+
+	public List<HoaDon> getHoaDon() {
+		return hoaDon;
+	}
+
+	public void setHoaDon(List<HoaDon> hoaDon) {
+		this.hoaDon = hoaDon;
+	}
+
+	public TaiKhoan getTaiKhoan() {
+		return taiKhoan;
+	}
+
+	public void setTaiKhoan(TaiKhoan taiKhoan) {
+		this.taiKhoan = taiKhoan;
+	}
+
+	public NhanVien() {
+	}
 
 }

@@ -11,10 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
@@ -22,12 +18,9 @@ import lombok.ToString;
  */
 
 @Entity
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
 public class TaiKhoan implements Serializable{
-    @Id
+    private static final long serialVersionUID = -741578179816393464L;
+	@Id
     @OneToOne
     @JoinColumn(name = "MaNhanVien", unique = true, nullable = false)
     private NhanVien nhanVien;
@@ -37,4 +30,32 @@ public class TaiKhoan implements Serializable{
     private LocalDateTime ngayTao;
     @Column(name = "NgayKetThuc", nullable = true)
     private LocalDateTime ngayKetThuc;
+	public NhanVien getNhanVien() {
+		return nhanVien;
+	}
+	public void setNhanVien(NhanVien nhanVien) {
+		this.nhanVien = nhanVien;
+	}
+	public String getMatKhau() {
+		return matKhau;
+	}
+	public void setMatKhau(String matKhau) {
+		this.matKhau = matKhau;
+	}
+	public LocalDateTime getNgayTao() {
+		return ngayTao;
+	}
+	public void setNgayTao(LocalDateTime ngayTao) {
+		this.ngayTao = ngayTao;
+	}
+	public LocalDateTime getNgayKetThuc() {
+		return ngayKetThuc;
+	}
+	public void setNgayKetThuc(LocalDateTime ngayKetThuc) {
+		this.ngayKetThuc = ngayKetThuc;
+	}
+	public TaiKhoan() {
+	}
+    
+    
 }

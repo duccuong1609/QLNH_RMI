@@ -38,18 +38,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/java/lib/AbsoluteLayout.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/datechooser.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/icepdf-core-6.2.2.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/icepdf-viewer-6.2.2.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/jiconfont-1.0.0_1.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/jiconfont-swing-1.0.1.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/LIB_IDETS.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/lombok.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/swing-chart-1.1.0-beta.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/swing-toast-notifications-1.0.1.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/swing-worker-1.1.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/swingx-1.6.1.jar"/>
-	<classpathentry kind="lib" path="src/main/java/lib/TimingFramework-0.55.jar"/>
+	<classpathentry kind="lib" path="lib/jiconfont-swing-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/jiconfont-1.0.0_1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

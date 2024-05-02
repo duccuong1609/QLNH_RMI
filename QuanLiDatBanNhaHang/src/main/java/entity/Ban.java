@@ -18,10 +18,6 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import utils.Enum.LoaiTrangThai;
 
 /**
@@ -29,10 +25,6 @@ import utils.Enum.LoaiTrangThai;
  * @author Laptop
  */
 @Entity
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
 @NamedQueries({
     @NamedQuery(name = "Ban.groupByMaTang", query = "SELECT b.tang, COUNT(b.tang) AS soBan FROM Ban b GROUP BY b.tang"),
     @NamedQuery(name = "Ban.findByFloor", query = "SELECT b FROM Ban b WHERE b.tang = :maTang"),
@@ -41,7 +33,9 @@ import utils.Enum.LoaiTrangThai;
     @NamedQuery(name = "Ban.updateStateById", query = "UPDATE Ban SET trangThai = :trangThai WHERE maBan = :maBan")
 })
 public class Ban implements Serializable{
-    @Id
+	
+    private static final long serialVersionUID = -2619275208424033280L;
+	@Id
     @Column(name = "MaBan", nullable = false)
     private String maBan;
     @Column(name = "SoGhe", nullable = false)
@@ -56,6 +50,42 @@ public class Ban implements Serializable{
     private String tang;
     @OneToMany(mappedBy = "ban",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<HoaDon> hoaDon;
-    
-    
+	public String getMaBan() {
+		return maBan;
+	}
+	public void setMaBan(String maBan) {
+		this.maBan = maBan;
+	}
+	public int getSoGhe() {
+		return soGhe;
+	}
+	public void setSoGhe(int soGhe) {
+		this.soGhe = soGhe;
+	}
+	public LoaiTrangThai getTrangThai() {
+		return trangThai;
+	}
+	public void setTrangThai(LoaiTrangThai trangThai) {
+		this.trangThai = trangThai;
+	}
+	public Ban getBanGop() {
+		return banGop;
+	}
+	public void setBanGop(Ban banGop) {
+		this.banGop = banGop;
+	}
+	public String getTang() {
+		return tang;
+	}
+	public void setTang(String tang) {
+		this.tang = tang;
+	}
+	public List<HoaDon> getHoaDon() {
+		return hoaDon;
+	}
+	public void setHoaDon(List<HoaDon> hoaDon) {
+		this.hoaDon = hoaDon;
+	}
+	public Ban() {
+	}
 }

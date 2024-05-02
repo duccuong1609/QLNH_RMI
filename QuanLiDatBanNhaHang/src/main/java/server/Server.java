@@ -26,7 +26,7 @@ import javax.naming.NamingException;
 
 public class Server {
 
-    private static final String URL = "rmi://DESKTOP-B2M7ONV:4361/";
+    private static final String URL = "rmi://KURO-PC:4361/";
     public static void main(String[] args) {
         try {
             Context context = new InitialContext();

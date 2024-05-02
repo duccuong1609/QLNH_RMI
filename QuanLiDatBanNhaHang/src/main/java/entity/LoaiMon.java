@@ -11,22 +11,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  *
  * @author dmx
  */
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
 public class LoaiMon implements Serializable{
-    @Id
+    private static final long serialVersionUID = 5460837009749072578L;
+	@Id
     @Column(name = "MaLoaiMon",length = 4,nullable = false)
     private String maLoaiMon;
     @Column(name = "TenLoai",columnDefinition = "NVARCHAR(50)",nullable = false)
@@ -34,7 +27,6 @@ public class LoaiMon implements Serializable{
     @Column(name = "ChuThich",columnDefinition = "NVARCHAR(255)")
     private String chuThich;
     @OneToMany(mappedBy = "loaiMon",cascade = CascadeType.ALL)
-    @ToString.Exclude
     private List<Mon> mon;
 
     public LoaiMon(String tenLoai, String chuThich, List<Mon> mon) {
@@ -42,4 +34,39 @@ public class LoaiMon implements Serializable{
         this.chuThich = chuThich;
         this.mon = mon;
     }
+
+	public String getMaLoaiMon() {
+		return maLoaiMon;
+	}
+
+	public void setMaLoaiMon(String maLoaiMon) {
+		this.maLoaiMon = maLoaiMon;
+	}
+
+	public String getTenLoai() {
+		return tenLoai;
+	}
+
+	public void setTenLoai(String tenLoai) {
+		this.tenLoai = tenLoai;
+	}
+
+	public String getChuThich() {
+		return chuThich;
+	}
+
+	public void setChuThich(String chuThich) {
+		this.chuThich = chuThich;
+	}
+
+	public List<Mon> getMon() {
+		return mon;
+	}
+
+	public void setMon(List<Mon> mon) {
+		this.mon = mon;
+	}
+
+	public LoaiMon() {
+	}
 }

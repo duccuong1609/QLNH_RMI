@@ -18,9 +18,6 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import utils.Enum.LoaiTrangThaiMon;
 
 /**
@@ -28,9 +25,6 @@ import utils.Enum.LoaiTrangThaiMon;
  * @author Laptop
  */
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 @NamedQueries({
     @NamedQuery(name = "Mon.Service", query = "SELECT m FROM Mon m inner join LoaiMon l on m.loaiMon = l WHERE m.trangThai = :trangThai"),//duccuong1609 : cai nay dung theo trang thai cung duoc
     @NamedQuery(name = "Mon.Popular5",query = "SELECT SUM(c.soLuong) as SoLuong, c.mon as Mon FROM ChiTietHoaDon c inner join HoaDon h on c.hoaDon = h where h.trangThai = 0 group by c.mon ORDER BY SoLuong DESC LIMIT 5"),
@@ -38,7 +32,8 @@ import utils.Enum.LoaiTrangThaiMon;
 })
 public class Mon implements Serializable{
 
-    @Id
+    private static final long serialVersionUID = 5962646781678782997L;
+	@Id
     @Column(name = "MaMon", length = 12, nullable = false)
     private String maMon;
     @Column(name = "TenMon", columnDefinition = "NVARCHAR(50)", nullable = false)
@@ -59,8 +54,123 @@ public class Mon implements Serializable{
     private List<ChiTietHoaDon> chiTietHoaDon;
     @Column(name = "DonVi", nullable = false)
     private String donVi;
+    
+    
 
-    public Mon(String tenMon, Double giaGoc, LoaiMon loaiMon, String hinhAnh, LoaiTrangThaiMon trangThai, List<ChiTietHoaDon> chiTietHoaDon) {
+    public Mon() {
+	}
+
+
+
+	public String getMaMon() {
+		return maMon;
+	}
+
+
+
+	public void setMaMon(String maMon) {
+		this.maMon = maMon;
+	}
+
+
+
+	public String getTenMon() {
+		return tenMon;
+	}
+
+
+
+	public void setTenMon(String tenMon) {
+		this.tenMon = tenMon;
+	}
+
+
+
+	public Double getGiaBan() {
+		return giaBan;
+	}
+
+
+
+	public void setGiaBan(Double giaBan) {
+		this.giaBan = giaBan;
+	}
+
+
+
+	public LoaiMon getLoaiMon() {
+		return loaiMon;
+	}
+
+
+
+	public void setLoaiMon(LoaiMon loaiMon) {
+		this.loaiMon = loaiMon;
+	}
+
+
+
+	public String getHinhAnh() {
+		return hinhAnh;
+	}
+
+
+
+	public void setHinhAnh(String hinhAnh) {
+		this.hinhAnh = hinhAnh;
+	}
+
+
+
+	public LoaiTrangThaiMon getTrangThai() {
+		return trangThai;
+	}
+
+
+
+	public void setTrangThai(LoaiTrangThaiMon trangThai) {
+		this.trangThai = trangThai;
+	}
+
+
+
+	public Double getGiaGoc() {
+		return giaGoc;
+	}
+
+
+
+	public void setGiaGoc(Double giaGoc) {
+		this.giaGoc = giaGoc;
+	}
+
+
+
+	public List<ChiTietHoaDon> getChiTietHoaDon() {
+		return chiTietHoaDon;
+	}
+
+
+
+	public void setChiTietHoaDon(List<ChiTietHoaDon> chiTietHoaDon) {
+		this.chiTietHoaDon = chiTietHoaDon;
+	}
+
+
+
+	public String getDonVi() {
+		return donVi;
+	}
+
+
+
+	public void setDonVi(String donVi) {
+		this.donVi = donVi;
+	}
+
+
+
+	public Mon(String tenMon, Double giaGoc, LoaiMon loaiMon, String hinhAnh, LoaiTrangThaiMon trangThai, List<ChiTietHoaDon> chiTietHoaDon) {
         this.tenMon = tenMon;
         this.giaGoc = giaGoc;
         this.loaiMon = loaiMon;

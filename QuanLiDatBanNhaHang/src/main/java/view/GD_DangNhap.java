@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jiconfont.swing.IconFontSwing;
 import raven.toast.Notifications;
+import utils.AppUtils;
+
 import static utils.AppUtils.*;
 
 /**

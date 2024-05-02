@@ -19,19 +19,12 @@ import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import utils.Enum.LoaiTrangThaiHoaDon;
 
 /**
  *
  * @author Laptop
  */
-@Getter
-@Setter
-@NoArgsConstructor
 @Entity
 @NamedQueries({
     @NamedQuery(name = "HoaDon.Last", query = "SELECT h FROM HoaDon h ORDER BY h.maHoaDon DESC"),
@@ -43,7 +36,8 @@ import utils.Enum.LoaiTrangThaiHoaDon;
 })
 public class HoaDon implements Serializable{
 
-    @Id
+    private static final long serialVersionUID = 1665117497841176559L;
+	@Id
     @Column(name = "MaHoaDon", nullable = false)
     private String maHoaDon;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -62,7 +56,6 @@ public class HoaDon implements Serializable{
     @Column(name = "TrangThai", nullable = false)
     @Enumerated(EnumType.ORDINAL)
     private LoaiTrangThaiHoaDon trangThai;
-    @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "hoaDon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ChiTietHoaDon> chiTietHoaDon;
     @Column(name = "NgayDatBan", nullable = true)
@@ -76,10 +69,8 @@ public class HoaDon implements Serializable{
     @Column(name = "NgayGioNhanBan", nullable = true)
     private LocalDateTime ngayGioNhanBan;
     @Column(name = "TongThanhToan", nullable = true)
-    @Setter(AccessLevel.NONE)
     private Double tongThanhToan;
     @Column(name = "TienPhaiThu", nullable = true)
-    @Setter(AccessLevel.NONE)
     private Double tienPhaiThu;
 
     public HoaDon(NhanVien nhanVien, LocalDateTime ngayLapHoaDon, Ban ban, LoaiTrangThaiHoaDon trangThai) {
@@ -95,7 +86,7 @@ public class HoaDon implements Serializable{
         this.ngayLapHoaDon = ngayLapHoaDon;
     }
 
-    private void setTongThanhToan(double tongThanhToan) {
+    public void setTongThanhToan(double tongThanhToan) {
         this.tongThanhToan = tongThanhToan;
     }
 
@@ -120,7 +111,119 @@ public class HoaDon implements Serializable{
         setTienPhaiThu(total);
     }
 
-    public void tongThanhToan() {
+    public String getMaHoaDon() {
+		return maHoaDon;
+	}
+
+	public void setMaHoaDon(String maHoaDon) {
+		this.maHoaDon = maHoaDon;
+	}
+
+	public NhanVien getNhanVien() {
+		return nhanVien;
+	}
+
+	public void setNhanVien(NhanVien nhanVien) {
+		this.nhanVien = nhanVien;
+	}
+
+	public KhachHang getKhachHang() {
+		return khachHang;
+	}
+
+	public void setKhachHang(KhachHang khachHang) {
+		this.khachHang = khachHang;
+	}
+
+	public List<ChiTietKhuyenMai> getChiTietKhuyenMai() {
+		return chiTietKhuyenMai;
+	}
+
+	public void setChiTietKhuyenMai(List<ChiTietKhuyenMai> chiTietKhuyenMai) {
+		this.chiTietKhuyenMai = chiTietKhuyenMai;
+	}
+
+	public LocalDateTime getNgayLapHoaDon() {
+		return ngayLapHoaDon;
+	}
+
+	public void setNgayLapHoaDon(LocalDateTime ngayLapHoaDon) {
+		this.ngayLapHoaDon = ngayLapHoaDon;
+	}
+
+	public Ban getBan() {
+		return ban;
+	}
+
+	public void setBan(Ban ban) {
+		this.ban = ban;
+	}
+
+	public LoaiTrangThaiHoaDon getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(LoaiTrangThaiHoaDon trangThai) {
+		this.trangThai = trangThai;
+	}
+
+	public LocalDateTime getNgayDatBan() {
+		return ngayDatBan;
+	}
+
+	public void setNgayDatBan(LocalDateTime ngayDatBan) {
+		this.ngayDatBan = ngayDatBan;
+	}
+
+	public int getSoLuongNguoi() {
+		return soLuongNguoi;
+	}
+
+	public void setSoLuongNguoi(int soLuongNguoi) {
+		this.soLuongNguoi = soLuongNguoi;
+	}
+
+	public String getYeuCauDatMon() {
+		return yeuCauDatMon;
+	}
+
+	public void setYeuCauDatMon(String yeuCauDatMon) {
+		this.yeuCauDatMon = yeuCauDatMon;
+	}
+
+	public String getYeuCauKhac() {
+		return yeuCauKhac;
+	}
+
+	public void setYeuCauKhac(String yeuCauKhac) {
+		this.yeuCauKhac = yeuCauKhac;
+	}
+
+	public LocalDateTime getNgayGioNhanBan() {
+		return ngayGioNhanBan;
+	}
+
+	public void setNgayGioNhanBan(LocalDateTime ngayGioNhanBan) {
+		this.ngayGioNhanBan = ngayGioNhanBan;
+	}
+
+	public Double getTienPhaiThu() {
+		return tienPhaiThu;
+	}
+
+	public void setTienPhaiThu(Double tienPhaiThu) {
+		this.tienPhaiThu = tienPhaiThu;
+	}
+
+	public List<ChiTietHoaDon> getChiTietHoaDon() {
+		return chiTietHoaDon;
+	}
+
+	public void setTongThanhToan(Double tongThanhToan) {
+		this.tongThanhToan = tongThanhToan;
+	}
+
+	public void tongThanhToan() {
         Double total = 0.0;
         for (ChiTietHoaDon detail : chiTietHoaDon) {
             total += detail.getThanhTien();
@@ -128,4 +231,7 @@ public class HoaDon implements Serializable{
         setTongThanhToan(total);
         this.tienPhaiThu = this.tongThanhToan;
     }
+
+	public HoaDon() {
+	}
 }

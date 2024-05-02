@@ -1,11 +1,10 @@
 package icon;
 
-import jiconfont.IconCode;
-import jiconfont.IconFont;
+import jiconfont.*;
 
 import java.io.InputStream;
 
-/**
+/*
  * Copyright (c) 2016 jIconFont <BR>
  * <BR>
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated

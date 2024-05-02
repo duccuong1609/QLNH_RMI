@@ -15,10 +15,6 @@ import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import utils.Enum.LoaiKhuyenMai;
 
 /**
@@ -26,13 +22,10 @@ import utils.Enum.LoaiKhuyenMai;
  * @author Laptop
  */
 @Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
 public class KhuyenMai implements Serializable{
 
-    @Id
+    private static final long serialVersionUID = -4485768801821870796L;
+	@Id
     @Column(name = "MaKhuyenMai", length = 21, nullable = false)
     private String maKhuyenMai;
     @Column(name = "TenKhuyenMai", columnDefinition = "NVARCHAR(100)", nullable = false)
@@ -59,4 +52,71 @@ public class KhuyenMai implements Serializable{
         this.loaiKhuyenMai = loaiKhuyenMai;
         this.ghiChu = ghiChu;
     }
+
+	public String getMaKhuyenMai() {
+		return maKhuyenMai;
+	}
+
+	public void setMaKhuyenMai(String maKhuyenMai) {
+		this.maKhuyenMai = maKhuyenMai;
+	}
+
+	public String getTenKhuyenMai() {
+		return tenKhuyenMai;
+	}
+
+	public void setTenKhuyenMai(String tenKhuyenMai) {
+		this.tenKhuyenMai = tenKhuyenMai;
+	}
+
+	public Date getNgayBatDau() {
+		return ngayBatDau;
+	}
+
+	public void setNgayBatDau(Date ngayBatDau) {
+		this.ngayBatDau = ngayBatDau;
+	}
+
+	public Date getNgayKetThuc() {
+		return ngayKetThuc;
+	}
+
+	public void setNgayKetThuc(Date ngayKetThuc) {
+		this.ngayKetThuc = ngayKetThuc;
+	}
+
+	public Double getChietKhau() {
+		return chietKhau;
+	}
+
+	public void setChietKhau(Double chietKhau) {
+		this.chietKhau = chietKhau;
+	}
+
+	public LoaiKhuyenMai getLoaiKhuyenMai() {
+		return loaiKhuyenMai;
+	}
+
+	public void setLoaiKhuyenMai(LoaiKhuyenMai loaiKhuyenMai) {
+		this.loaiKhuyenMai = loaiKhuyenMai;
+	}
+
+	public String getGhiChu() {
+		return ghiChu;
+	}
+
+	public void setGhiChu(String ghiChu) {
+		this.ghiChu = ghiChu;
+	}
+
+	public List<ChiTietKhuyenMai> getChiTietKhuyenMai() {
+		return chiTietKhuyenMai;
+	}
+
+	public void setChiTietKhuyenMai(List<ChiTietKhuyenMai> chiTietKhuyenMai) {
+		this.chiTietKhuyenMai = chiTietKhuyenMai;
+	}
+
+	public KhuyenMai() {
+	}
 }

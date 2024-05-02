@@ -54,7 +54,7 @@
                   <Border info="null"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon/table_icon.png"/>
+                  <Image iconType="3" name="/icons/table_icon.png"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -76,7 +76,7 @@
                   <Border info="null"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon/fork_icon.png"/>
+                  <Image iconType="3" name="/icons/fork_icon.png"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

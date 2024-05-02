@@ -14,10 +14,6 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
@@ -25,16 +21,14 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "ChiTietKhuyenMai")
-@Getter
-@Setter
-@NoArgsConstructor
 
 @NamedQueries({
     @NamedQuery(name = "ChiTietKhuyenMai.delete", query = "DELETE FROM ChiTietKhuyenMai ct WHERE ct.hoaDon = :hoaDon and ct.khuyenMai = :khuyenMai")
 })
 public class ChiTietKhuyenMai implements Serializable{
 
-    @Id
+    private static final long serialVersionUID = -403822230181711492L;
+	@Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "MaHoaDon", nullable = false)
     private HoaDon hoaDon;
@@ -43,7 +37,6 @@ public class ChiTietKhuyenMai implements Serializable{
     @JoinColumn(name = "MaKhuyenMai", nullable = false)
     private KhuyenMai khuyenMai;
     @Column(name = "ThanhTien")
-    @Setter(AccessLevel.NONE)
     private Double thanhTien;
 
     public ChiTietKhuyenMai(HoaDon hoaDon, KhuyenMai khuyenMai) {
@@ -61,4 +54,32 @@ public class ChiTietKhuyenMai implements Serializable{
         setThanhTien(total);
     }
 
+	public HoaDon getHoaDon() {
+		return hoaDon;
+	}
+
+	public void setHoaDon(HoaDon hoaDon) {
+		this.hoaDon = hoaDon;
+	}
+
+	public KhuyenMai getKhuyenMai() {
+		return khuyenMai;
+	}
+
+	public void setKhuyenMai(KhuyenMai khuyenMai) {
+		this.khuyenMai = khuyenMai;
+	}
+
+	public Double getThanhTien() {
+		return thanhTien;
+	}
+
+	public void setThanhTien(Double thanhTien) {
+		this.thanhTien = thanhTien;
+	}
+
+	public ChiTietKhuyenMai() {
+	}
+    
+    
 }

@@ -12,10 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import utils.Enum.LoaiTheThanhVien;
 
 /**
@@ -23,13 +19,10 @@ import utils.Enum.LoaiTheThanhVien;
  * @author dmx
  */
 @Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
 
 public class TheThanhVien implements Serializable{
-    @Id
+    private static final long serialVersionUID = 444600401799101675L;
+	@Id
     @Column(name="MaThe",nullable = false)
     private String maThe;
     @Column(name="DiemTich",nullable = false)
@@ -46,4 +39,40 @@ public class TheThanhVien implements Serializable{
         this.khachHang = khachHang;
         this.loaiThe = loaiThe;
     }
+
+	public String getMaThe() {
+		return maThe;
+	}
+
+	public void setMaThe(String maThe) {
+		this.maThe = maThe;
+	}
+
+	public Double getDiemTich() {
+		return diemTich;
+	}
+
+	public void setDiemTich(Double diemTich) {
+		this.diemTich = diemTich;
+	}
+
+	public KhachHang getKhachHang() {
+		return khachHang;
+	}
+
+	public void setKhachHang(KhachHang khachHang) {
+		this.khachHang = khachHang;
+	}
+
+	public LoaiTheThanhVien getLoaiThe() {
+		return loaiThe;
+	}
+
+	public void setLoaiThe(LoaiTheThanhVien loaiThe) {
+		this.loaiThe = loaiThe;
+	}
+
+	public TheThanhVien() {
+	}
+    
 }
